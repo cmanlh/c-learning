@@ -60,7 +60,6 @@ int main(void)
                         letterCount++;
 
                         targetValue = atoi(name);
-                        printf("%d\n", targetValue);
                     }
                 }
 
