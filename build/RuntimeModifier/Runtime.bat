@@ -1,5 +1,5 @@
 set projectName=RuntimeModifier
 set programName=Runtime
-mkdir .\output\%projectName%
-gcc -g -o .\output\%projectName%\%programName%.exe .\src\%projectName%\%programName%.c .\lib\raylib\windows\libraylib.a -lgdi32 -lwinmm
-.\output\%projectName%\%programName%.exe
+mkdir output\%projectName%
+gcc -g -o output\%projectName%\%programName%.exe prj\%projectName%\%programName%.c lib\raylib\windows\libraylib.a -lgdi32 -lwinmm
+output\%projectName%\%programName%.exe
