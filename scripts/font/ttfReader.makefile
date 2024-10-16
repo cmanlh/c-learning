@@ -1,13 +1,14 @@
 shell= cmd
 
 PROJECT_PATH					=C:\git\c-learning\prj\font
+PROJECT_OUTPUT					=C:\git\c-learning\output\font
 PROJECT_SRC						=$(PROJECT_PATH)\src
-PROJECT_RELEASE					=$(PROJECT_PATH)\release
-PROJECT_BUILD_PATH				=$(PROJECT_PATH)\build
-PROJECT_BUILD_OBJ				=$(PROJECT_BUILD_PATH)\obj
+PROJECT_RELEASE					=$(PROJECT_OUTPUT)\release
+PROJECT_BUILD_PATH				=$(PROJECT_OUTPUT)\build
+PROJECT_BUILD_OBJ				=$(PROJECT_OUTPUT)\obj
 
-BUILD_FLAG_INCLUDE				=-I$(PROJECT_SRC) -I$(PROJECT_PATH)\include\raylib
-BUILD_FLAG_LOADLIB				=-L$(PROJECT_PATH)\lib\windows\raylib
+BUILD_FLAG_INCLUDE				=-I$(PROJECT_SRC) -IC:\git\c-learning\include\raylib
+BUILD_FLAG_LOADLIB				=-LC:\git\c-learning\lib\raylib\windows
 
 COMPILE_FLAG					=$(BUILD_FLAG_INCLUDE) $(BUILD_FLAG_LOADLIB) -lraylib -lopengl32 -lgdi32 -lwinmm -std=c99 -Wall
 
@@ -24,4 +25,4 @@ resource_copy:
 
 run: resource_copy
 	gcc -o $(PROJECT_RELEASE)\ttfReader.exe $(PROJECT_SRC)\ttfReader.c $(COMPILE_FLAG)
-	call start /D $(PROJECT_RELEASE) $(PROJECT_PATH)\scripts\run.bat $(PROJECT_RELEASE)\git-editor.exe
+	call start /D $(PROJECT_RELEASE) C:\git\c-learning\scripts\run.bat $(PROJECT_RELEASE)\ttfReader.exe
