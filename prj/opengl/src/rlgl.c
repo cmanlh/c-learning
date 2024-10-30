@@ -21,6 +21,8 @@ int main(int argc, char const *argv[])
     SetTargetFPS(60);
 
     Vector2 center = (Vector2){120, 200};
+
+    Vector2 center2 = (Vector2){512, 200};
     // float radius = 100;
     Color color = BLACK;
     float radiusH = 100.0f;
@@ -32,7 +34,7 @@ int main(int argc, char const *argv[])
         BeginDrawing();
 
         rlBegin(RL_LINES);
-        Vector2 startPoint = rotate((Vector2){center.x + cosf(0.0f) * radiusH, center.y + sinf(0.0f) * radiusV}, center, PI / 6.0f);
+        Vector2 startPoint = rotate((Vector2){center.x + radiusH, center.y}, center, PI / 6.0f);
         for (int i = 0; i < 360; i += 10)
         {
             rlColor4ub(color.r, color.g, color.b, color.a);
@@ -46,16 +48,20 @@ int main(int argc, char const *argv[])
         }
         rlEnd();
 
-        rlBegin(RL_LINES);
-        rlColor4ub(color.r, color.g, color.b, color.a);
-        rlVertex2f(300, 150);
-        rlVertex2f(360, 100);
+        rlBegin(RL_TRIANGLES);
+        startPoint = rotate((Vector2){center2.x + radiusH, center2.y}, center2, PI / 6.0f);
+        for (int i = 0; i < 360; i += 10)
+        {
+            rlColor4ub(color.r, color.g, color.b, color.a);
+            rlVertex2f(center2.x, center2.y);
 
-        rlVertex2f(360, 100);
-        rlVertex2f(420, 200);
+            Vector2 endPoint = rotate((Vector2){center2.x + cosf(DEG2RAD * (i + 10)) * radiusH, center2.y + sinf(DEG2RAD * (i + 10)) * radiusV}, center2, PI / 6.0f);
+            rlVertex2f(endPoint.x, endPoint.y);
 
-        rlVertex2f(420, 200);
-        rlVertex2f(300, 150);
+            rlVertex2f(startPoint.x, startPoint.y);
+
+            startPoint = endPoint;
+        }
         rlEnd();
 
         EndDrawing();
